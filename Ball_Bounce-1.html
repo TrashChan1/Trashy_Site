@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html> 
+  <head>
+    <title>Processing.JS inside Webpages: Template</title> 
+  </head>
+  <body>
+	<!--This draws the canvas on the webpage -->
+    <canvas id="mycanvas"></canvas> 
+  </body>
+ 
+  <!-- Include the processing.js library -->
+  <!-- See https://khanacademy.zendesk.com/hc/en-us/articles/202260404-What-parts-of-ProcessingJS-does-Khan-Academy-support- for differences -->
+  <script src="https://cdn.jsdelivr.net/processing.js/1.4.8/processing.min.js"></script> 
+  <script>
+  var programCode = function(processingInstance) {
+    with (processingInstance) {
+      size(400*3, 400*3); 
+      frameRate(60);
+        
+      // Paste code from Khan Academy here:
+	var universalGravityCoefficient = 0.16;
+	var canvasCoefficient = 3;
+	var initialSpeed = 6;
+	
+	
+	var Velocity = function(x, y){
+	    this.x = x;
+	    this.y = y;
+	    //this.speed = sqrt(x*x + y*y);
+	    
+	};
+	Velocity.prototype.gravitize = function(gravityCoefficient){
+	    this.y -= gravityCoefficient;
+	};
+
+	var Position = function(x, y){
+	    this.x = x;
+	    this.y = y;
+	    this.trueX = x + 200*canvasCoefficient;
+	    this.trueY = -y + 200*canvasCoefficient;
+	};
+
+	Position.prototype.move = function(velocity){
+	    this.x += velocity.x;
+	    this.y += velocity.y;
+	    this.trueX = this.x + 200*canvasCoefficient;
+	    this.trueY = -this.y + 200*canvasCoefficient;
+	};
+
+	Position.prototype.setDistance = function(distance){
+	    var angle = atan2(this.y, this.x);
+	    this.x = cos(angle)*distance;
+	    this.y = sin(angle)*distance;
+	};
+
+	Position.prototype.copyPlacement = function(position){
+	    this.trueX = position.trueX;
+	    this.trueY = position.trueY;
+	};
+
+	Velocity.prototype.bounce = function(position, elasticity){
+	    var rotationAngle = radians(-90) - atan2(position.y, position.x);
+	    var speed = sqrt(this.x*this.x + this.y*this.y)*elasticity;
+	    var currentVelocityAngle = atan2(this.y, this.x);
+	    var flooredVelocityAngle = currentVelocityAngle + rotationAngle;
+	    var newFlooredYAngle = -speed*sin(flooredVelocityAngle);
+	    var newFlooredXAngle = speed*cos(flooredVelocityAngle);
+	    var newFlooredAngle = atan2(newFlooredYAngle, newFlooredXAngle);
+	    var bouncedVelocityAngle = newFlooredAngle - rotationAngle;
+	    this.x = cos(bouncedVelocityAngle)*speed;
+	    this.y = sin(bouncedVelocityAngle)*speed;
+    
+	};
+	var randomAngle = random(-3.14159, 3.14159);
+	var ball1velocity = new Velocity(cos(randomAngle)*initialSpeed, sin(randomAngle)*initialSpeed);
+	var ball1positions = [new Position(0, 0)];
+	for (var i = 0; i < 30; i++){
+    	ball1positions.push(new Position(0,0));
+	}
+
+
+	var ball1Radius = 50;
+	var bounceCount = 0;
+	var frames = 0;
+	var draw = function() {
+    	frames++;
+    	if(frames % 4 === 0){
+            	for (var i = ball1positions.length - 1; i > 0; i--){
+        	ball1positions[i].copyPlacement(ball1positions[i-1]);
+    	}
+    	}
+
+    
+    	ball1positions[1].copyPlacement(ball1positions[0]);
+    	background(0, 89, 255);
+    	ball1positions[0].move(ball1velocity);
+    	ball1velocity.gravitize(universalGravityCoefficient);
+    
+    	for (var i = ball1positions.length - 1; i > 0; i-=3){
+        	fill(300-i*10, i*4, 100+i*2);
+        	ellipse(ball1positions[i].trueX, ball1positions[i].trueY, ball1Radius, ball1Radius);
+        
+    	}
+        	noFill();
+    	ellipse(200*canvasCoefficient, 200*canvasCoefficient, 400*canvasCoefficient, 400*canvasCoefficient);
+    
+    	var ball1SameQuadrant = ball1positions[0].x > 0 && ball1velocity.x > 0 || ball1positions[0].x < 0 && ball1velocity.x < 0 || ball1positions[0].y > 0 && ball1velocity.y > 0 || ball1positions[0].y < 0 && ball1velocity.y < 0;
+    	var ball1Distance = sqrt(ball1positions[0].x*ball1positions[0].x + ball1positions[0].y*ball1positions[0].y);
+    	if(ball1Distance >= 200*canvasCoefficient-ball1Radius/2 && ball1SameQuadrant){
+        	ball1positions[0].setDistance(199*canvasCoefficient-ball1Radius/2);
+        	ball1velocity.bounce(ball1positions[0], 0.985);
+        	bounceCount += 1;
+    	}
+    	else{ball1Radius = 50+bounceCount;}
+    
+	};
+
+
+    }};
+
+  // Get the canvas that ProcessingJS will use
+  var canvas = document.getElementById("mycanvas"); 
+  // Pass the function to ProcessingJS constructor
+  var processingInstance = new Processing(canvas, programCode); 
+  </script>
+</html>
