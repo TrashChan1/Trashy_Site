@@ -80,8 +80,9 @@ var animating = false;
 var done_animating = false;
 var animation_speed = 0.5;
 
-noStroke();
 
+stroke(0,0,0);
+strokeWeight(5);
 var draw = function(){
     background(119, 119, 119);
     
@@ -141,7 +142,7 @@ var draw = function(){
     
 
     // sliders
-    
+    strokeWeight(2);
     fill(94, 93, 94);
     rect(sliderX - slider_distance, sliderY, sliderWidth, sliderHeight);
     rect(sliderX + slider_distance, sliderY, sliderWidth, sliderHeight);
@@ -169,6 +170,7 @@ var draw = function(){
 
 
     // buttons
+    strokeWeight(5);
     fill(255,255,255);
     rect(buttonX, buttonY, 200, 100, 50);
     rect(buttonX, buttonY + button_distance, 230, 100, 50);
