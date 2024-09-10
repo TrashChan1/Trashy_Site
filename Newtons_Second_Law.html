@@ -30,6 +30,8 @@ all credet to them-->
             var mouseIsPressed = false;
             processing.mousePressed = function () { mouseIsPressed = true; };
             processing.mouseReleased = function () { mouseIsPressed = false; };
+            processing.ontouchstart = function () { mouseIsPressed = true; };
+            processing.ontouchend = function () { mouseIsPressed = false; };
     
             var keyIsPressed = false;
             processing.keyPressed = function () { keyIsPressed = true; };
