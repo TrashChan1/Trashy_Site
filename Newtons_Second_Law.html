@@ -54,8 +54,10 @@ var Force = 2.0;
 var Mass = 1.1;
 var acceleration = Force / Mass;
 
+
+
 var sliderX = 1000;
-var sliderY = 150;
+var sliderY = 100;
 var sliderWidth = 20;
 var sliderHeight = 300;
 var slider_distance = 90;
@@ -89,14 +91,16 @@ var draw = function(){
     acceleration = Force / Mass;
     
     // Animation zone
+    var man_size = 150 * Force;
+    var box_size = 150 * Mass;
 
     // Man pushing
-    var man_size = 100*sqrt(Force);
+    
     ctx.drawImage(pusherImg, pushX, 745 - man_size, man_size, man_size);
     fill(0,0,255);
 
     // box
-    var box_size = 100*sqrt(Mass);
+    
     rect(pushX + man_size, 745 - box_size, box_size, box_size);
 
     // arrow + acceleration text
@@ -106,7 +110,7 @@ var draw = function(){
     ctx.drawImage(arrowImg, arrow_x, 720 - arrow_height/2, arrow_length, arrow_height);
     fill(255, 0, 0);
     textSize(30);
-    text(Number(acceleration).toFixed(2) + "\nM/S", pushX + man_size + 10*sqrt(box_size) + 30, 630);
+    text(Number(acceleration).toFixed(2) + "\nM/S", pushX + man_size + 17*sqrt(box_size) + 30, 630);
 
     // = and /
     fill(0, 0, 0);
@@ -146,15 +150,19 @@ var draw = function(){
     rect(sliderX - slider_distance - 5, forceSliderY + 17, 30, 15, 30);
     rect(sliderX + slider_distance - 5, massSliderY + 17, 30, 15, 30);
     // Unit Values
-    
+    // Force
     fill(0,255,0);
-    textSize(40);
+    textSize(45);
     text("Force", sliderX - slider_distance - 37, sliderY - 10);
     textSize(30);
     text(Number(Force).toFixed(2) + "\nNewtons", sliderX - slider_distance - 30, sliderY + sliderHeight + 30);   // force
- 
+    // Mass
     fill(0,0,255);
+    textSize(45);
+    text("Mass", sliderX + slider_distance - 37, sliderY - 10);
+    textSize(30);
     text(Number(Mass).toFixed(2) + "\nKilograms", sliderX + slider_distance, sliderY + sliderHeight + 30);  // mass
+    
 
 
     // buttons
