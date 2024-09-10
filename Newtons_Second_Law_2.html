@@ -52,7 +52,7 @@ all credet to them-->
                 
                 
 // INSERT YOUR KHAN ACADEMY PROGRAM HERE
-background(255, 255, 255);
+background(255, 240, 200);
 frameRate(20);
 var centerY = 250;
 var centerX = 350;
@@ -84,11 +84,11 @@ var animating = false;
 var done_animating = false;
 var animation_speed = 0.5;
 
-noStroke();
 
+stroke(0,0,0);
+strokeWeight(5);
 var draw = function(){
-    background(119, 119, 119);
-    
+    background(255, 245, 210);
     
     // linear 2 when min, 0 when max 
     // (lower number is higher dial so we need it backwards for the user)
@@ -151,7 +151,7 @@ var draw = function(){
     textSize(30);
 
     // sliders
-    
+    strokeWeight(2);
     fill(94, 93, 94);
     rect(sliderX - slider_distance, sliderY, sliderWidth, sliderHeight);
     rect(sliderX + slider_distance, sliderY, sliderWidth, sliderHeight);
@@ -179,6 +179,7 @@ var draw = function(){
 
 
     // buttons
+    strokeWeight(5);
     fill(255,255,255);
     rect(buttonX, buttonY, 200, 100, 50);
     rect(buttonX, buttonY + button_distance, 230, 100, 50);
