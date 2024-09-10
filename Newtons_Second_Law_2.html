@@ -133,18 +133,20 @@ var draw = function(){
     textSize(100 * Force);
     text("F", centerX - 60*Force, centerY+(35*Force));
     
-    // A
-    fill(255, 0, 0);
-    textSize(100 * acceleration);
-    text("A", centerX + 130 - 25*acceleration, centerY + 20*acceleration);
-    textSize(30);
-    
     // M
     fill(0, 0, 255);
     textSize(100 * Mass);
-    text("M", centerX + 310 - 31*Mass, centerY + 20*Mass);
-    
-    
+    text("M", 
+            centerX + 130 - 31 * Mass,  // x
+            centerY + 20 * Mass);       // y
+
+    // A
+    fill(255, 0, 0);
+    textSize(100 * acceleration);
+    text("A", 
+            centerX + 310 - 25*acceleration, // x
+            centerY + 20 * acceleration);      // y
+    textSize(30);
 
     // sliders
     
