@@ -455,50 +455,17 @@ gracefully at all.</p>
 <h1 id="how-did-valvesoftware-respond">How did ValveSoftware
 respond?</h1>
 <ul>
-<li>Valve the corporation was entirely silent on the issue, though the
-team dedicated to solving user issues went to some trouble trying to
-find exactly what caused the bug and how to protect users from it.</li>
-<li>keyvin was very calm about the whole ordeal, though he did say it
-would be nice if he “got a special badge and an email apology”.
+<li><p>Valve the corporation was entirely silent on the issue, though
+the team dedicated to solving user issues went to some trouble trying to
+find exactly what caused the bug and how to protect users from
+it.</p></li>
+<li><p>keyvin was very calm about the whole ordeal, though he did say it
+would be nice if he “got a special badge and an email apology”.</p>
 <ul>
 <li>As far as I can tell, keyvin recieved no badge or email.</li>
 </ul></li>
-</ul>
-<h1 id="this-section-requires-more-research.">This section requires more
-research.</h1>
-<h3 id="this-could-be-super-not-true-and-it-could-be-that-users-simply-didnt-care-to-continue-to-host-he-repo">This
-could be super not true, and it could be that users simply didn’t care
-to continue to host he repo</h3>
-<h5 id="how-connected-was-valvesoftware-to-this-github-repo-who-removed-the-repo-and-why">How
-connected was ValveSoftware to this github repo? Who removed the repo
-and why?</h5>
-<h6 id="this-was-written-when-i-thought-that-steam_latest-was-the-same-as-the-steam-for-linux-repository">This
-was written when I thought that steam_latest was the same as the
-steam-for-linux repository</h6>
-<ul>
-<li><p>Furthermore, they actually removed the github commit message
-where the user <em>username</em> first pushed the bug.</p>
-<ul>
-<li>We don’t know for sure if that user was the one who pushed the bug
-itself or if he simply reported the update that someone else wrote. This
-is because the support repo doesn’t actually contain any of the release
-files.</li>
-<li>If the user who published the commit had nothing to do with writing
-or reviewing the buggy commit, then it could be argued that
-ValveSoftware was doing this to protect that innocent user. However, I
-find it highly unlikely that a user who transcribed this update,
-including the comment # Scary! had nothing to do with the creation or
-review of the code.</li>
-<li>Even if that were the case, Valve released no statements to protect
-this user and simply removed the commit message.</li>
-<li>Also, that commit message was potentially important for the sake of
-understanding how the bug worked and how to prevent it, so Valve could
-be argued to be actively engaging in harmful cowardice by removing that
-commit.</li>
-</ul></li>
 <li><p>according to the help forum, ValveSoftware did quickly publish a
-hot fix for this issue, but it’s not a very sophisticated one: ## Bad
-section over</p></li>
+hot fix for this issue, but it’s not a very sophisticated one:</p></li>
 <li><p>Many users pointed out examples of more robust and reliable
 checks than simply checking for null. For example, bash doesn’t
 interpret <code>rm -rf /*</code> any differently from
