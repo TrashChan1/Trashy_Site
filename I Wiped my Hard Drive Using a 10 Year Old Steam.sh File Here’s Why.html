@@ -1561,45 +1561,175 @@ This means that you can run into this same error without cd'ing all the way to t
 </p>
 <p>
 <video width="320" height="240" controls>
-   <source src="Break_using_Source.webm" type="video/webm">
+   <source src="./Break_using_Source.webm" type="video/webm">
    Recording of first hard drive wipe
 </video>
 </p>
-<h1>How did ValveSoftware respond?</h1>
+<h1>How did Valve Corporation respond?</h1>
 <ul>
 <li>
 <p>Valve the corporation was entirely silent on the issue, though the team dedicated to solving user issues went to some trouble trying to find exactly what caused the bug and how to protect users from it.</p>
 </li>
 <li>
-<p>keyvin was very calm about the whole ordeal, though he did say it would be nice if he &quot;got a special badge and an email apology&quot;.</p>
+<p>keyvin was very calm about the whole ordeal, though he did say it would be nice if he could get a &quot;special badge and an email apology from whoever added the #Scary! comment.&quot;. <a href="https://github.com/ValveSoftware/steam-for-linux/issues/3671#issuecomment-70241165">commented here</a></p>
 <ul>
 <li>As far as I can tell, keyvin recieved no badge or email.</li>
 </ul>
 </li>
 <li>
-<p>according to the help forum, ValveSoftware did quickly publish a hot fix for this issue, but it's not a very sophisticated one:</p>
+<p>according to the help forum, Valve Corporation did quickly publish a hot fix for this issue, but it's not a very sophisticated one:</p>
 </li>
 <li>
-<p>Many users pointed out examples of more robust and reliable checks than simply checking for null. For example, bash doesn't interpret <code>rm -rf /*</code> any differently from <code>rm -rf /*</code>. So if $STEAMROOT somehow were set to &quot; &quot;, then the issue would still occur.</p>
+<p>Many users pointed out examples of more robust and reliable checks than simply checking for null. For example, bash doesn't interpret <code>rm -rf /*</code> any differently from <code>rm -rf /*</code> (an additional space). So if $STEAMROOT somehow were set to &quot; &quot;, then the issue would still occur.</p>
 <ul>
-<li>In spite of this, I have not been able to find any instances of users' data being removed (from this bug) since this hot fix.</li>
-<li>Additionally, ValveSoftware fundamentally changed how they handled install and reinstall to a (hopefully) more fundamentally robust system years later.</li>
+<li>In spite of this, I have not been able to find any instances of users' data being removed (from this bug) since this fix.</li>
+<li>Additionally, Valve Corporation fundamentally changed how they handled install and reinstall to a (hopefully) more fundamentally robust system years later.</li>
 </ul>
 </li>
+</ul>
+<h1>Valve was quiet?</h1>
+<ul>
+<li>As far as I can find, the only message that Valve posted on the issue is a week later in <a href="http://web.archive.org/web/20150121012448/http://store.steampowered.com:80/news/">this news</a> update on Jan 19 after they already pushed the client fix. (if you follow the link, it's the 6th update down)</li>
+<li>On a page long update, close to the bottom:</li>
+<li>&quot;Fixed a rare bug where Steam could delete user files when failing to start&quot;</li>
+<li>At this time the fix was &quot;check to see if $steamroot is empty&quot;</li>
 </ul>
 <h1>Who is Irusak?</h1>
 <p>Irusak actually has nothing to do with this story, but he's worth mentioning because some users on the forum believed that he was related to the fiasco, and I'd like to clear the confusion.</p>
-<p>Irusak, or Lukas Rusak is a developer who was working on an embedded version of Steam for linux at the same time as this all took place. He had a repository named steam_latest which is where he was posting the files that he was using toward this end. Because of this, he had a commit in which he pushed the Steam.sh file onto his repository. Some users thought that this was the first instance of a commit from ValveSoftware to an official repository but it was not.</p>
-<p>I want to mention this here because I spent a considerable amount of time while researching this believing that this was the case because of this comment on the discussion thread. It wasn't until I looked closer at the repository and at Irusak's account on github that I realized that he had no relation to ValveSoftware.</p>
-<p>I also emailed Lukas to confirm that he had no connection to ValveSoftware and that his project was independent and he was kind enough to respond to confirm.</p>
+<p>Irusak, or Lukas Rusak is a developer who was working on an embedded version of Steam for linux at the same time as this all took place. He had a repository named steam_latest which is where he was posting the files that he was using toward this end. Because of this, he had a commit in which he pushed the Steam.sh file onto his repository. Some users thought that this was the first instance of a commit from Valve to an official repository but it was not.</p>
+<p>I want to mention this here because I spent a considerable amount of time while researching this believing that this was the case because of this comment on the discussion thread. It wasn't until I looked closer at the repository and at Irusak's account on github that I realized that he had no relation to Valve Corporation.</p>
+<p>I also emailed Lukas to confirm that he had no connection to Valve Corporation and that his project was independent and he was kind enough to respond to confirm.</p>
+<h1>Valve claimed to have fixed the issue before it was actually fixed?</h1>
+<ul>
+<li>
+<p>I'm not certain on this one. I was testing the January 19th 2015 archived version of the Steam website. I wanted to see if they had any kind of warning on the download page. (they don't )</p>
+</li>
+<li>
+<p>I clicked the link that took me to the actual .deb linux steam download. The Wayback machine only caputured January 3rd and Febuary 08, nothing in-between for the actual download.</p>
+</li>
+<li>
+<p>So I downloaded the <a href="http://web.archive.org/web/20150208181915/http://repo.steampowered.com/steam/archive/precise/steam_latest.deb">Febuary 08th</a> version to see for myself if the alleged fix according to the discussion posts was correct.</p>
+</li>
+<li>
+<p>Steam.sh file was unchanged at this date. I'm not certain if this is historically accurate to the experience of a user of the website on Febuary 08th, or if this is the wayback machine defaulting internal links to dates at which they had captured the redirect link.</p>
+</li>
+<li>
+<p>So I monitored the net traffic and reloaded the page. Here's the link for the GET function that downloaded the steam_latest.deb file.</p>
+</li>
+<li>
+<p><a href="http://web.archive.org/web/20150213225258/http://repo.steampowered.com/steam/archive/precise/steam_latest.deb">http://web.archive.org/web/20150213225258/http://repo.steampowered.com/steam/archive/precise/steam_latest.deb</a></p>
+</li>
+<li>
+<p>after /web/ is 20150213225258. This corresponds to 2015-02-13, 22:52:58 meaning that this is the February 13th, 10:52 pm version of the link, nearly a full month after Valve claimed to have solved the issue, and the # Scary! comment is still there, the rm -rf is still there deterred by no if statements.</p>
+</li>
+<li>
+<p>The meta-data for the files and directories say that none of the files were changed any later than August 26, 2014.</p>
+</li>
+<li>
+<p>Either the wayback machine faced some large technical error, or the update was not in fact pushed until at least a month after they were claimed to have been fixed in the Steam updates page.</p>
+</li>
+<li>
+<p>In fact, I checked every link until the .deb file was different. on the <a href="http://web.archive.org/web/20150522151626/http://repo.steampowered.com/steam/archive/precise/steam_latest.deb">May 22nd link,</a>I found that the file was changed, with the most recent change occurring on may 5th 2015. At which point we get the following command:</p>
+<pre><code>  if [ &quot;$STEAMROOT&quot; != &quot;&quot; ]; then
+  		rm -rf &quot;$STEAMROOT/&quot;*
+  fi
+</code></pre>
+</li>
+<li>
+<p>I find it likely that this is the date of the actual change to the Steam.sh file since other files remain unchanged according to the metadata.</p>
+</li>
+</ul>
+<p><img src<img src="Pasted image 20241109213128.png"></p>
+<ul>
+<li>As a sanity check, I went back to the steam-for-linux issue thread to see when users mentioned this fix. User Tele42 <a href="https://github.com/ValveSoftware/steam-for-linux/issues/3671#issuecomment-70974508">mentioned it exactly</a> on Jan 22nd, 2015. This comment does, however, mention that this is the beta version of the client.</li>
+<li>However, I have no way to verify that this was in fact the beta version since the official way to access the beta version of the Steam client is to download the regular version, change a setting, and then allow the Steam client to update itself.</li>
+</ul>
+<h1>The current state of affairs</h1>
+<ul>
+<li>The officially correct functionality of the script is for it to delete everything in the containing directory according to the uninstall support page <a href="https://help.steampowered.com/en/faqs/view/3C73-90F9-F600-0266">the uninstall support page</a></li>
+<li>This could still be considered dangerous.</li>
+</ul>
+<h1>How apt handles install and uninstall</h1>
+<p>Other package managers will typically handle both install and uninstall using lists of installed and installable files which enumerate all of the files and directories which must be added on install and removed on uninstall.</p>
+<p>This makes them very safe when installing and uninstalling.</p>
+<p>Here's an example of a file from my var/lib/dpkg/status/info/7zip.list file on my system:</p>
+<pre><code>/.
+/usr
+/usr/bin
+/usr/bin/7z
+/usr/bin/7za
+/usr/bin/7zr
+/usr/bin/p7zip
+/usr/lib
+/usr/lib/7zip
+/usr/lib/7zip/7z
+/usr/lib/7zip/7z.so
+/usr/lib/7zip/7zCon.sfx
+/usr/lib/7zip/7za
+/usr/lib/7zip/7zr
+/usr/share
+/usr/share/doc
+/usr/share/doc/7zip
+/usr/share/doc/7zip/7zC.txt.gz
+/usr/share/doc/7zip/7zFormat.txt.gz
+/usr/share/doc/7zip/Methods.txt
+/usr/share/doc/7zip/changelog.Debian.gz
+/usr/share/doc/7zip/copyright
+/usr/share/doc/7zip/lzma.txt.gz
+/usr/share/doc/7zip/readme.txt.gz
+/usr/share/doc/7zip/src-history.txt.gz
+/usr/share/man
+/usr/share/man/man1
+/usr/share/man/man1/7z.1.gz
+/usr/share/man/man1/p7zip.1.gz
+/usr/share/man/man1/7za.1.gz
+/usr/share/man/man1/7zr.1.gz
+</code></pre>
+<h1>Links</h1>
+<p><a href="http://web.archive.org/web/20150122045955/http://store.steampowered.com/subscriber_agreement/">2015 Steam EULA</a><br/>
+<a href="http://web.archive.org/web/20151222163433/https://media.steampowered.com/apps/valve/Valve_NewEmployeeHandbook.pdf">2015 Valve New Employee Handbook</a></p>
+<h1>Total users harmed:</h1>
+<p>At least 4 people claim to have encountered this issue:<br/>
+Keyvin, Doofy, Spanguole, and Onodera-punpun.</p>
+<p>An additional 2 people believe they may have encountered this issue:<br/>
+Terzag and Sebadoom.</p>
+<p>Users claim to have seen comments on Reddit that claim to have encountered this issue, but I was unable to corroborate this claim.</p>
+<ol>
+<li>
+<p><a href="https://github.com/ValveSoftware/steam-for-linux/issues/3671">Keyvin, the original poster</a></p>
+</li>
+<li>
+<p><a href="https://github.com/ValveSoftware/steam-for-linux/issues/3671#issuecomment-70021818">Doofy</a></p>
+</li>
+<li>
+<p><a href="https://github.com/ValveSoftware/steam-for-linux/issues/3671#issuecomment-70241451">Terzag might have lost things</a></p>
+</li>
+<li>
+<p><a href="https://github.com/ValveSoftware/steam-for-linux/issues/3671#issuecomment-70255789">Sebadoom lost data, perhaps from this.</a></p>
+</li>
+<li>
+<p><a href="https://github.com/ValveSoftware/steam-for-linux/issues/3671#issuecomment-70285453">Spanguole encountered the bug but was saved by preparation </a></p>
+</li>
+<li>
+<p>Onodera-punpun (this user was delet ed later along with all comments posted, so I can't link it directly, but I was able to find the comment with the wayback machine)<br/>
+<img src="Pasted image 20241109220225.png"><br/>
+<a href="https://github.com/ValveSoftware/steam-for-linux/issues/3671#issuecomment-70255759">Here's a link</a> to another user mentioning this comment</p>
+</li>
+<li>
+<p>The above commenter also mentioned people on reddit who claim to have had this issue, but I was not able to find any such comments.</p>
+</li>
+</ol>
 <h1>Near misses</h1>
 <p><a href="https://www.reddit.com/r/linux/comments/2sjjr3/comment/cnqtcd9/?utm_source=share&amp;utm_medium=web3x&amp;utm_name=web3xcss&amp;utm_term=1&amp;utm_content=share_button">1 Scared</a><br/>
 <a href="https://www.reddit.com/r/linux/comments/2sjjr3/comment/cnqr0ss/?utm_source=share&amp;utm_medium=web3x&amp;utm_name=web3xcss&amp;utm_term=1&amp;utm_content=share_button">2 Works fine</a><br/>
 <a href="https://www.reddit.com/r/linux/comments/2sjjr3/comment/cnq5c6f/?utm_source=share&amp;utm_medium=web3x&amp;utm_name=web3xcss&amp;utm_term=1&amp;utm_content=share_button">3 Successfully warned</a></p>
 <h1>Timeline</h1>
 <ul>
+<li>August 26, 2014: Most recent change to the Steam.sh script prior to the 1 line security patch.</li>
 <li>Jan 14, 2015: User keyvin opens the issue report</li>
+<li>Jan 19th: Steam update that the bug was fixed</li>
+<li>Jan 14 - Jan 22 : Valve pushed the fix to the beta client</li>
+<li>Jan 21st : Official ValveSoftware github contributor, johnv-valve states that Valve Corporation is working on large scale security changes in <a href="https://github.com/ValveSoftware/steam-for-linux/issues/3671#issuecomment-70933933">this comment</a></li>
+<li>May 5th : the update gets pushed to the standard client</li>
 </ul>
-<h1>Side note:</h1>
-<p>Steam also currently has <a href="https://help.steampowered.com/en/faqs/view/3C73-90F9-F600-0266">this page </a>in the faq section of the website, so it looks like the &quot;It's the user's job to not get their system nuked&quot; mentality may still be alive and well.</p>
 </article><script>document.getElementsByClassName("markdown-body")[0].style.fontFamily='CJK';var code=document.getElementsByTagName("code");for(var i=0;i<code.length;++i){code[i].style.fontFamily='CJK MONO'}</script><script>document.querySelectorAll('code[class^="language-"]').forEach(function(element){var c=element.getAttribute('class');element.setAttribute('class',c.replace(/language-/g,''));hljs.highlightElement(element)})</script></body></html>
