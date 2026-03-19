@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Markov Generator</title>
+  </head>
+  <body>
+    <div id="app">
+
+      <section id="center">
+        <div class="hero">
+        </div>
+        <div>
+          <h1>Markov Text Generator</h1>
+          <form id="frm1" action="/action_page.php">
+            Seed Text:<br>
+            <textarea id="generator_input" name="input" rows="4" cols="50">
+input sample text here to train the markov model</textarea>
+            <br>
+            Word Count: 
+            <input type="number" id="quantity" name="quantity" value="20"/>
+            <input type="button" id="genButton" name="genButton" value="genButton"></input>
+          </form>
+          <br>
+          <button id="saveBtn">Save Text File</button>
+          <h3>Output:</h6>
+          <p id="output"></p>
+        </div>
+      </section>
+
+      <section id="next-steps">
+
+        <div class="ticks"></div>
+      </section>
+  </body>
+
+  <script type="module" src="/src/main.js"></script>
+</html>

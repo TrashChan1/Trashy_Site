@@ -1,0 +1,109 @@
+// Author: Trash
+// Date: Mar 10, 2026
+
+use std::{env, fs, io::{BufWriter, Write}};
+use markov_generator::*;
+
+fn help_message() {
+    println!("Usage:\n  mark_gen [options] [count] [options]
+
+                        Which will output [count] many words\n
+
+Options:
+   -m             inserts generated words into output file where special string ' [INSERT_HERE] ' is found.
+                  The leading and trailing spaces are necessary and will be removed in the output.
+                  Must be used with -t [file_name].
+   -t [file_name] Specifies a template file for the magic insert.
+   -i [file_name] specifies input file to generate markov model from. Default: 'txt.txt'
+   -o [file_name] specifies output file to output text to. Outputs to terminal if not set.
+   -h             outputs this help message.");
+}
+
+fn main() {
+    let mut i_file_name: String = "/home/trashc/Documents/rust/markov_generator/txt.txt".to_string();
+    let mut o_file_name: Option<String> = None;
+    let mut template_filename: String = "".to_string();
+    let mut count: usize = 200;
+    let mut magic_insertion = false;
+    let mut args = env::args();
+    args.next();
+    while let Some(arg) = args.next() {
+        //println!("arg: {arg}");
+        match &arg as &str {
+            "-i" => match args.next() {
+                Some(i) => i_file_name = i.clone(),
+                None => {
+                    println!("-i should be followed by a filename.\n");
+                    help_message(); 
+                    return ();
+                }
+            },
+            "-o" => match args.next() {
+                Some(o) => o_file_name = Some(o),
+                None => {
+                    println!("-o should be followed by a filename.\n");
+                    help_message();
+                    return ();
+                },
+            },
+            "-t" => match args.next() {
+                Some(t) => template_filename = t,
+                None => {
+                    println!("-t should be followed by a filename.\n");
+                    help_message();
+                    return ();
+                },
+            },
+            "-m" => magic_insertion = true,
+            "-h" => {help_message(); return ();},
+            _ => match arg.parse::<usize>() {
+                Ok(i) => count = i,
+                Err(_) => {
+                    println!("Count argument must be a positive integer.\n");
+                    help_message(); 
+                    return ();}
+            },
+        }
+    }
+
+    if magic_insertion && template_filename == "".to_string() {
+        println!("Magic insertion requires a specified template file using -t.\n\
+                 The outputted text will have [count] words of generated text at each '[INSERT_HERE]' section in the template.\n");
+        help_message();
+        return ();
+    }
+
+    // template file string: let t_file_str = fs::read_to_string(template_filename)?;
+
+    if let Ok(contents) = fs::read_to_string(i_file_name.clone()) {
+        let out_str: String = match magic_insertion {
+            true => match fs::read_to_string(template_filename) {
+                Ok(template) => magic_insert(contents, count, template) + "\n",
+                Err(error) => {
+                    println!("Failed to read template\n Error: {error}\n");
+                    help_message();
+                    return ();
+                    //"ERROR".to_string()
+                },
+            },
+            false => spit_out(&Modeler::Text(contents), count) + "\n",
+        };
+
+        let _ = match o_file_name { // o_writer = Writer::CLI or Writer::FILE
+            Some(file) => match std::fs::File::create(file.clone()) {
+                Ok(o_f) => {
+                    let _ = write!(&mut BufWriter::new(o_f), "{out_str}");
+                },
+                _ => {
+                    println!("failed to create file {file}. Outputting to terminal."); 
+                    println!("{out_str}")
+                    //write!(&mut BufWriter::new(std::io::stdout()), "{out_str}")
+                },
+            },
+            None => println!("{out_str}"),
+        };
+    } else {
+        println!("failed to read the input file: {i_file_name}\n");
+        help_message();
+    }
+}
