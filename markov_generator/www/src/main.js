@@ -1,6 +1,6 @@
 import { setupGenerator } from './generate.js'
 import { setupSave } from './save.js'
-import init from '/pkg/markov_generator.js'
+import init from '../pkg/markov_generator.js'
 
 await init()
 

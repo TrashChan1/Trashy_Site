@@ -1,4 +1,4 @@
-import init, { greet, spit_out } from '/pkg/markov_generator.js'
+import init, { greet, spit_out } from '../pkg/markov_generator.js'
 export function setupGenerator(inElement, outElement, buttonElement, countElement) {
   outElement.innerHTML = "generated text will appear here"
   const setOutput = () => {
