@@ -1,0 +1,17 @@
+{
+  "name": "markov_generator",
+  "type": "module",
+  "version": "0.1.0",
+  "files": [
+    "markov_generator_bg.wasm",
+    "markov_generator.js",
+    "markov_generator_bg.js",
+    "markov_generator.d.ts"
+  ],
+  "main": "markov_generator.js",
+  "types": "markov_generator.d.ts",
+  "sideEffects": [
+    "./markov_generator.js",
+    "./snippets/*"
+  ]
+}
