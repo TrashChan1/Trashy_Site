@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trash Home</title>
+    
+    
+      <!-- FAVICON -->
+    <link rel="icon" href="TODO!">
+    
+    
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<div class="scrap" id="rubberBand"><img   src="media/rubber_band.gif" class="img" alt=""></div>
+<div class="scrap" id="brokenPencil"><img src="media/broken_pencil.gif" class="img" alt=""></div>
+<div class="scrap" id="microchip"><img    src="media/microchip.gif" class="img" alt=""></div>
+<div class="scrap" id="pinwheel"><img     src="media/pinwheel.gif" class="img" alt=""></div>
+<div class="scrap" id="glassesLens"><img  src="media/glasses_lens.gif" class="img" alt=""></div>
+
+<div id="workBench"><h3>Drop Scrap Here</h3></div>
+<div class="benchPart invisible" id="rubberBandBench"><img   src="media/rubber_band.gif"    class="img" alt=""></div>
+<div class="benchPart invisible" id="brokenPencilBench"><img src="media/broken_pencil.gif" class="img" alt=""></div>
+<div class="benchPart invisible" id="microchipBench"><img    src="media/microchip.gif"     class="img" alt=""></div>
+<div class="benchPart invisible" id="pinwheelBench"><img     src="media/pinwheel.gif"      class="img" alt=""></div>
+<div class="benchPart invisible" id="glassesLensBench"><img  src="media/glasses_lens.gif"  class="img" alt=""></div>
+<div class="benchPart invisible" id="paddleBall" onclick="window.open('ball_bounce.html','_blank');" style="cursor: pointer;">
+    <img src="media/paddle_ball.gif"    class="img" alt="" >
+</div>
+
+<script>
+
+const scrapBenchMap = new Map();
+scrapBenchMap.set('rubberBand', 'rubberBandBench');
+scrapBenchMap.set('brokenPencil', 'brokenPencilBench');
+scrapBenchMap.set('microchip', 'microchipBench');
+scrapBenchMap.set('pinwheel', 'pinwheelBench');
+scrapBenchMap.set('glassesLens', 'glassesLensBench');
+
+const initialPos = new Map();
+document.querySelectorAll(".scrap").forEach(scrap => {
+	const style = window.getComputedStyle(scrap);
+	initialPos.set(scrap.id, {left: style.getPropertyValue('left'), top: style.getPropertyValue('top')});
+});
+const pinwheel = document.getElementById('pinwheel');
+
+const onBench = new Map();
+
+const workBench = document.getElementById("workBench");
+
+// mouse-click movement logic
+document.querySelectorAll(".scrap").forEach(scrap => {
+    let offsetX = 0;
+    let offsetY = 0;
+
+    scrap.addEventListener("pointerdown", e => {
+        if (scrap.dataset.locked === "true") return;
+        e.preventDefault();
+
+        const rect = scrap.getBoundingClientRect();
+        offsetX = e.clientX - rect.left;
+        offsetY = e.clientY - rect.top;
+
+        scrap.setPointerCapture(e.pointerId);
+
+        function move(ev) {
+            scrap.style.left = (ev.clientX - offsetX) + "px";
+            scrap.style.top  = (ev.clientY - offsetY) + "px";
+
+            // live hover feedback
+            if (isOverlapping(scrap, workBench)) {
+                workBench.classList.add("active");
+            } else {
+                workBench.classList.remove("active");
+            }
+        }
+
+        function up(ev) {
+            scrap.releasePointerCapture(ev.pointerId);
+            document.removeEventListener("pointermove", move);
+            document.removeEventListener("pointerup", up);
+
+            // final drop check
+            if (isOverlapping(scrap, workBench)) {
+                handleDrop(scrap);
+            }
+
+            workBench.classList.remove("active");
+        }
+
+        document.addEventListener("pointermove", move);
+        document.addEventListener("pointerup", up);
+    });
+});
+
+
+/* =========================================================
+   HELPERS
+========================================================= */
+
+function isOverlapping(a, b) {
+    const ar = a.getBoundingClientRect();
+    const br = b.getBoundingClientRect();
+
+    return !(
+        ar.right < br.left ||
+        ar.left > br.right ||
+        ar.bottom < br.top ||
+        ar.top > br.bottom
+    );
+}
+
+function handleDrop(scrap) {
+	benchScrap = document.getElementById(scrapBenchMap.get(scrap.id));
+	if (onBench.has(scrap.id)) {
+		return;
+	}
+	onBench.set(scrap.id, true);
+	benchScrap.classList.remove('invisible');
+	scrap.classList.add('invisible');
+	checkCombo();
+}
+
+function checkCombo() {
+	if (onBench.has('rubberBand') && onBench.has('brokenPencil') && onBench.has('glassesLens')) {
+	    buildItem('slingShot');
+	} else if (onBench.has('rubberBand') && onBench.has('brokenPencil') && onBench.has('pinwheel')) {
+	    buildItem('paddleBall');
+	} else if (onBench.has('brokenPencil') && onBench.has('microchip') && onBench.has('pinwheel')) {
+	    buildItem('typeWriter');
+	} else if (onBench.has('microchip') && onBench.has('glassesLens') && onBench.has('pinwheel')) {
+	    buildItem('laser');
+        } else if (onBench.has('rubberBand') && onBench.has('brokenPencil') && onBench.has('pinwheel')) {
+	    buildItem('megaphone');
+	}
+}
+
+function buildItem(item) {
+	document.querySelectorAll(".scrap").forEach(scrap => {
+		scrap.style.left = initialPos.get(scrap.id).left;
+		scrap.style.top = initialPos.get(scrap.id).top;
+		scrap.classList.remove('invisible');
+	});
+	document.querySelectorAll(".benchPart").forEach(benchPart => {
+		benchPart.classList.add('invisible');
+	});
+	onBench.clear();
+	document.getElementById(item).classList.remove('invisible');
+	console.log(item);
+}
+
+</script>
