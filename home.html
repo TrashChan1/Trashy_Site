@@ -11,6 +11,7 @@
     
     
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="homePositions.css">
 
 </head>
 
@@ -26,9 +27,22 @@
 <div class="benchPart invisible" id="microchipBench"><img    src="media/microchip.gif"     class="img" alt=""></div>
 <div class="benchPart invisible" id="pinwheelBench"><img     src="media/pinwheel.gif"      class="img" alt=""></div>
 <div class="benchPart invisible" id="glassesLensBench"><img  src="media/glasses_lens.gif"  class="img" alt=""></div>
-<div class="benchPart invisible" id="paddleBall" onclick="window.open('ball_bounce.html','_blank');" style="cursor: pointer;">
+<div class="construct invisible" id="paddleBall" onclick="window.open('ball_bounce.html','_blank');" style="cursor: pointer;">
     <img src="media/paddle_ball.gif"    class="img" alt="" >
 </div>
+<div class="construct invisible" id="slingShot" onclick="window.open('Newtons_Second_Law.html','_blank');" style="cursor: pointer;">
+    <img src="media/slingshot.gif"    class="img" alt="" >
+</div>
+<div class="construct invisible" id="megaphone" onclick="window.open('Propaganda_Technology.html','_blank');" style="cursor: pointer;">
+    <img src="media/megaphone.gif"    class="img" alt="" >
+</div>
+<div class="construct invisible" id="typewriter" onclick="window.open('markov_generator/www/index.html','_blank');" style="cursor: pointer;">
+    <img src="media/typewriter.gif"    class="img" alt="" >
+</div>
+<div class="construct invisible" id="laser" onclick="window.open('I Wiped my Hard Drive Using a 10 Year Old Steam.sh File Here’s Why.html','_blank');" style="cursor: pointer;">
+    <img src="media/laser.gif"    class="img" alt="" >
+</div>
+
 
 <script>
 
@@ -42,7 +56,12 @@ scrapBenchMap.set('glassesLens', 'glassesLensBench');
 const initialPos = new Map();
 document.querySelectorAll(".scrap").forEach(scrap => {
 	const style = window.getComputedStyle(scrap);
-	initialPos.set(scrap.id, {left: style.getPropertyValue('left'), top: style.getPropertyValue('top')});
+	const leftPos = 100 * style.getPropertyValue('left').replace('px', '') / window.innerWidth + "%";
+	const topPos = 100 * style.getPropertyValue('top').replace('px', '') / window.innerHeight + "%";
+	initialPos.set(scrap.id, {
+		left: leftPos,
+		top: topPos 
+	});
 });
 const pinwheel = document.getElementById('pinwheel');
 
@@ -66,8 +85,12 @@ document.querySelectorAll(".scrap").forEach(scrap => {
         scrap.setPointerCapture(e.pointerId);
 
         function move(ev) {
-            scrap.style.left = (ev.clientX - offsetX) + "px";
-            scrap.style.top  = (ev.clientY - offsetY) + "px";
+		const left = ev.clientX - offsetX;
+		const top = ev.clientY - offsetY;
+		const percentLeft = left / window.innerWidth * 100;
+		const percentTop = top / window.innerHeight * 100;
+            scrap.style.left = percentLeft + "%";
+            scrap.style.top  = percentTop + "%";
 
             // live hover feedback
             if (isOverlapping(scrap, workBench)) {
@@ -124,13 +147,13 @@ function handleDrop(scrap) {
 }
 
 function checkCombo() {
-	if (onBench.has('rubberBand') && onBench.has('brokenPencil') && onBench.has('glassesLens')) {
-	    buildItem('slingShot');
-	} else if (onBench.has('rubberBand') && onBench.has('brokenPencil') && onBench.has('pinwheel')) {
+	if (onBench.has('rubberBand') && onBench.has('pinwheel') && onBench.has('glassesLens')) {
 	    buildItem('paddleBall');
+	} else if (onBench.has('rubberBand') && onBench.has('brokenPencil') && onBench.has('glassesLens')) {
+	    buildItem('slingShot');
 	} else if (onBench.has('brokenPencil') && onBench.has('microchip') && onBench.has('pinwheel')) {
-	    buildItem('typeWriter');
-	} else if (onBench.has('microchip') && onBench.has('glassesLens') && onBench.has('pinwheel')) {
+	    buildItem('typewriter');
+	} else if (onBench.has('microchip') && onBench.has('pinwheel') && onBench.has('glassesLens')) {
 	    buildItem('laser');
         } else if (onBench.has('rubberBand') && onBench.has('brokenPencil') && onBench.has('pinwheel')) {
 	    buildItem('megaphone');

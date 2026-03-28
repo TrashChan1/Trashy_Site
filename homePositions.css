@@ -1,0 +1,18 @@
+:root {
+	--space: calc((100 - 17) / 4);
+}
+#rubberBand        {left: 10%;   top: 65%;}
+#brokenPencil      {left: 25%;   top: 75%;}
+#microchip         {left: 40%;   top: 70%;}
+#pinwheel          {left: 55%;   top: 60%;}
+#glassesLens       {left: 70%;   top: 65%;}
+#rubberBandBench   {left: 49%;   top: 44%;}
+#brokenPencilBench {left: 50.5%; top: 43%;}
+#microchipBench    {left: 52.5%; top: 45%;}
+#pinwheelBench     {left: 55%;   top: 44%;}
+#glassesLensBench  {left: 57%;   top: 45%;}
+#paddleBall        {left: calc(var(--space) * 0%);   top: 2%;}
+#slingShot         {left: calc(var(--space) * 1%);   top: 2%;}
+#typewriter        {left: calc(var(--space) * 2%);   top: 2%;}
+#laser             {left: calc(var(--space) * 3%);   top: 2%;}
+#megaphone         {left: calc(var(--space) * 4%);   top: 2%;}

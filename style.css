@@ -1,158 +1,51 @@
 body {
 	background-image: url(media/paper.gif);
 }
+div {
+	position: absolute;
+}
+img {
+    width: 100%;*/
+    height: 100%;
+    image-rendering: pixelated;
+    pointer-events: none;
+}
 
 .invisible {
 	visibility: hidden;
 }
 
-/* =========================================================
-   SCRAP WHEN ON BENCH - APPEARS WHEN SCRAP DISAPPEARS
-========================================================= */
+/*SCRAP WHEN ON BENCH - APPEARS WHEN SCRAP DISAPPEARS*/
 .benchPart {
-	position: absolute;
-	width: calc(100vh * 0.03);
+	width: calc(100vw * 0.03);
 	height: auto;
 }
 
-
-/* =========================================================
-   STUFFIES — ONLY INTERACTIVE ELEMENTS
-========================================================= */
-
 .scrap {
-    position: absolute;
-
-    /* SIZE CONTROL */
-    width: calc(100vh * 0.12);
-    height: auto;                 /* no forced square */
+    width: calc(100vw * 0.12);
+    height: auto;
 
     cursor: grab;
     touch-action: none;
     pointer-events: auto;
     z-index: 20;
-
-    /* Smooth scale for hover / drag */
-    transition: transform 0.15s ease;
 }
 
 .scrap:active {
     cursor: grabbing;
 }
 
-/* Image never captures pointer */
-.img {
-    width: 100%;
-    height: 100%;
-    image-rendering: pixelated;
-    pointer-events: none;
+.construct {
+    width: calc(100vw * 0.15);
+    height: auto;
 }
-
-
-
-/* =========================================================
-   INDIVIDUAL STUFFY POSITIONS + SIZES
-========================================================= */
-
-#rubberBand {
-    left: 25%;
-    top: 65%;
-    width: calc(100vh * 0.08);
-}
-
-#brokenPencil {
-    left: 35%;
-    top: 75%;
-    width: calc(100vh * 0.12);
-}
-
-#microchip {
-    left: 46%;
-    top: 70%;
-    width: calc(100vh * 0.13);
-}
-
-#pinwheel {
-    left: 60%;
-    top: 75%;
-    width: calc(100vh * 0.10);
-}
-
-#glassesLens {
-    left: 70%;
-    top: 65%;
-    width: calc(100vh * 0.11);
-}
-
-
-#rubberBandBench {
-    left: 49%;
-    top: 44%;
-    width: calc(100vh * 0.04);
-}
-
-#brokenPencilBench {
-    left: 50.5%;
-    top: 43%;
-    width: calc(100vh * 0.06);
-}
-
-#microchipBench {
-    left: 52.5%;
-    top: 45%;
-    width: calc(100vh * 0.06);
-}
-
-#pinwheelBench {
-    left: 55%;
-    top: 44%;
-    width: calc(100vh * 0.05);
-}
-
-#glassesLensBench {
-    left: 57%;
-    top: 45%;
-    width: calc(100vh * 0.05);
-}
-
-#paddleBall {
-	left: 20%;
-	top 20%;
-	width: calc(100vh * 0.1);
-}
-
-
-
-/* =========================================================
-   DROP ZONE — COLLISION ONLY
-========================================================= */
 
 #workBench {
-    position: absolute;
     left: 50%;
     top:40%;
     width: 10%;
-    height: calc(100vh * 0.20);
-
-
-    /* Must NEVER block dragging */
-    pointer-events: none;
-}
-
-/* =========================================================
-   DROP ZONE — COLLISION ONLY
-========================================================= */
-
-#dropZone {
-    position: absolute;
-    left: 50%;
-    top:40%;
-    transform: translate(-50%, -50%);
-    width: calc(100vh * 0.10);
-    height: calc(100vh * 0.20);
-
+    height: calc(100vw * 0.15);
 
     /* Must NEVER block dragging */
     pointer-events: none;
 }
-
