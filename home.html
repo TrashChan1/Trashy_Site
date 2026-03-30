@@ -47,7 +47,9 @@
 
 
 <script>
-sessionStorage.setItem('inc', 0);
+let inc = 0;
+inc = sessionStorage.getItem('inc');
+sessionStorage.setItem('inc', inc);
 function refreshMallet() {
     const inc = sessionStorage.getItem('inc');
     sessionStorage.setItem('inc', inc + 1);

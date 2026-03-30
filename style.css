@@ -43,15 +43,15 @@ img {
 
 .construct {
     transition: left 1s, top 1s;
-    width: 15%;
+    width: 10%;
     height: auto;
     left: 50%;   
     top: calc(100vh - (100vw * 0.15) - 100vh * 0.5);
     pointer-events: none;
-    cursor: url("media/claw_open.png")25 80, grab;
 }
-.construct:active {
-    cursor: url("media/claw_closed.png")25 80, grabbing;
+.construct:hover {
+    width: 13%;
+    opacity: 0.7;
 }
 
 #workBench {
