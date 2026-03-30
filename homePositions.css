@@ -17,4 +17,5 @@
 #mallet {
     left: 50%;   top: calc(100vh - (100vw * 0.15) - 100vh * 0.5);
     pointer-events: none;
+    cursor: url("media/claw_closed.png")25 80, auto;
 }

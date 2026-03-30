@@ -55,8 +55,8 @@ img {
 }
 
 #workBench {
-    left: 40%;
-    top:40%;
+    left: 39%;
+    top:  35%;
     width: 30%;
     height: calc(100vw * 0.15);
     cursor: url("media/claw_closed.png")25 80, grabbing;
