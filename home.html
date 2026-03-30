@@ -27,19 +27,19 @@
 <div class="benchPart invisible" id="microchipBench"><img    src="media/microchip.gif"     class="img" alt=""></div>
 <div class="benchPart invisible" id="pinwheelBench"><img     src="media/pinwheel.gif"      class="img" alt=""></div>
 <div class="benchPart invisible" id="glassesLensBench"><img  src="media/glasses_lens.gif"  class="img" alt=""></div>
-<div class="construct invisible" id="paddleBall" onclick="window.open('ball_bounce.html','_blank');" style="cursor: pointer;">
+<div class="construct invisible" id="paddleBall" onclick="window.open('ball_bounce.html','_blank');">
     <img src="media/paddle_ball.gif"    class="img" alt="" >
 </div>
-<div class="construct invisible" id="slingShot" onclick="window.open('Newtons_Second_Law.html','_blank');" style="cursor: pointer;">
+<div class="construct invisible" id="slingShot" onclick="window.open('Newtons_Second_Law.html','_blank');" >
     <img src="media/slingshot.gif"    class="img" alt="" >
 </div>
-<div class="construct invisible" id="megaphone" onclick="window.open('Propaganda_Technology.html','_blank');" style="cursor: pointer;">
+<div class="construct invisible" id="megaphone" onclick="window.open('Propaganda_Technology.html','_blank');" >
     <img src="media/megaphone.gif"    class="img" alt="" >
 </div>
-<div class="construct invisible" id="typewriter" onclick="window.open('markov_generator/www/index.html','_blank');" style="cursor: pointer;">
+<div class="construct invisible" id="typewriter" onclick="window.open('markov_generator/www/index.html','_blank');" >
     <img src="media/typewriter.gif"    class="img" alt="" >
 </div>
-<div class="construct invisible" id="laser" onclick="window.open('I Wiped my Hard Drive Using a 10 Year Old Steam.sh File Here’s Why.html','_blank');" style="cursor: pointer;">
+<div class="construct invisible" id="laser" onclick="window.open('I Wiped my Hard Drive Using a 10 Year Old Steam.sh File Here’s Why.html','_blank');" >
     <img src="media/laser.gif"    class="img" alt="" >
 </div>
 <div class="construct" id="mallet"><img src="media/mallet.gif" class="img invisible" alt="" id="malletImg"></div>
@@ -95,6 +95,8 @@ document.querySelectorAll(".scrap").forEach(scrap => {
 
         scrap.setPointerCapture(e.pointerId);
 
+	scrap.classList.add("grabbing");
+
         function move(ev) {
 		const left = ev.clientX - offsetX;
 		const top = ev.clientY - offsetY;
@@ -122,13 +124,13 @@ document.querySelectorAll(".scrap").forEach(scrap => {
             }
 
             workBench.classList.remove("active");
+            scrap.classList.remove("grabbing");
         }
 
         document.addEventListener("pointermove", move);
         document.addEventListener("pointerup", up);
     });
 });
-
 
 /* =========================================================
    HELPERS

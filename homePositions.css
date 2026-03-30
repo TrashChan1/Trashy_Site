@@ -2,7 +2,6 @@
 	--space: calc((100 - 17) / 4);
 
 }
-.moved {}
 #rubberBand        {left: 10%;   top: 65%;}
 #brokenPencil      {left: 25%;   top: 75%;}
 #microchip         {left: 40%;   top: 70%;}
@@ -15,4 +14,7 @@
 #pinwheelBench     {left: 55%;   top: 40%;}
 #glassesLensBench  {left: 63%;   top: 40%;}
 
-#mallet            {left: 50%;   top: calc(100vh - (100vw * 0.15) - 100vh * 0.5);}
+#mallet {
+    left: 50%;   top: calc(100vh - (100vw * 0.15) - 100vh * 0.5);
+    pointer-events: none;
+}

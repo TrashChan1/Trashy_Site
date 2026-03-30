@@ -1,3 +1,8 @@
+
+html {
+    cursor: url("media/claw_closed.png")25 80, grabbing;
+    min-height: 100%;
+}
 body {
 	background-image: url(media/paper.gif);
 }
@@ -8,31 +13,32 @@ img {
     width: 100%;
     height: 100%;
     image-rendering: pixelated;
-    pointer-events: none;
+    pointer-events: auto;
 }
 
 .invisible {
-	visibility: hidden;
+    visibility: hidden;
+    cursor: url("media/claw_closed.png")25 80, grabbing;
 }
 
 /*SCRAP WHEN ON BENCH - APPEARS WHEN SCRAP DISAPPEARS*/
 .benchPart {
 	width: calc(100vw * 0.06);
 	height: auto;
+        cursor: url("media/claw_open.png")25 80, grab;
 }
 
 .scrap {
     width: calc(100vw * 0.12);
     height: auto;
-
-    cursor: grab;
+    cursor: url("media/claw_open.png")25 80, grab;
     touch-action: none;
-    pointer-events: auto;
     z-index: 20;
+    pointer-events: auto;
 }
 
-.scrap:active {
-    cursor: grabbing;
+.grabbing {
+    cursor: url("media/claw_closed.png")25 80, grabbing;
 }
 
 .construct {
@@ -41,6 +47,11 @@ img {
     height: auto;
     left: 50%;   
     top: calc(100vh - (100vw * 0.15) - 100vh * 0.5);
+    pointer-events: none;
+    cursor: url("media/claw_open.png")25 80, grab;
+}
+.construct:active {
+    cursor: url("media/claw_closed.png")25 80, grabbing;
 }
 
 #workBench {
@@ -48,6 +59,7 @@ img {
     top:40%;
     width: 30%;
     height: calc(100vw * 0.15);
+    cursor: url("media/claw_closed.png")25 80, grabbing;
 
     /* Must NEVER block dragging */
     pointer-events: none;
