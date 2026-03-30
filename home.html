@@ -21,7 +21,7 @@
 <div class="scrap" id="pinwheel"><img     src="media/pinwheel.gif" class="img" alt=""></div>
 <div class="scrap" id="glassesLens"><img  src="media/glasses_lens.gif" class="img" alt=""></div>
 
-<div id="workBench"><h3>Drop Scrap Here</h3></div>
+<div id="workBench"><img src="media/bench.gif" class="img" alt=""/></div>
 <div class="benchPart invisible" id="rubberBandBench"><img   src="media/rubber_band.gif"    class="img" alt=""></div>
 <div class="benchPart invisible" id="brokenPencilBench"><img src="media/broken_pencil.gif" class="img" alt=""></div>
 <div class="benchPart invisible" id="microchipBench"><img    src="media/microchip.gif"     class="img" alt=""></div>
@@ -42,9 +42,20 @@
 <div class="construct invisible" id="laser" onclick="window.open('I Wiped my Hard Drive Using a 10 Year Old Steam.sh File Here’s Why.html','_blank');" style="cursor: pointer;">
     <img src="media/laser.gif"    class="img" alt="" >
 </div>
+<div class="construct" id="mallet"><img src="media/mallet.gif" class="img invisible" alt="" id="malletImg"></div>
+
 
 
 <script>
+sessionStorage.setItem('inc', 0);
+function refreshMallet() {
+    const inc = sessionStorage.getItem('inc');
+    sessionStorage.setItem('inc', inc + 1);
+    const mallet = document.getElementById('malletImg');
+    //mallet.src = "media/blank.gif";
+    mallet.classList.remove('invisible');
+    mallet.src = "media/mallet.gif?" + inc;
+}
 
 const scrapBenchMap = new Map();
 scrapBenchMap.set('rubberBand', 'rubberBandBench');
@@ -160,7 +171,9 @@ function checkCombo() {
 	}
 }
 
-function buildItem(item) {
+async function buildItem(item) {
+	refreshMallet();
+	await sleep(700);
 	document.querySelectorAll(".scrap").forEach(scrap => {
 		scrap.style.left = initialPos.get(scrap.id).left;
 		scrap.style.top = initialPos.get(scrap.id).top;
@@ -170,8 +183,29 @@ function buildItem(item) {
 		benchPart.classList.add('invisible');
 	});
 	onBench.clear();
-	document.getElementById(item).classList.remove('invisible');
+	let construct = document.getElementById(item);
+	construct.classList.remove('invisible');
+        construct.style.top  = '2%';
+	if (item == 'paddleBall') {
+            construct.style.left = 'calc(var(--space) * 0%)';
+	}
+	if (item == 'slingShot') {
+            construct.style.left = 'calc(var(--space) * 1%)';
+	}
+	if (item == 'typewriter') {
+            construct.style.left = 'calc(var(--space) * 2%)';
+	}
+	if (item == 'laser') {
+            construct.style.left = 'calc(var(--space) * 3%)';
+	}
+	if (item == 'megaphone') {
+            construct.style.left = 'calc(var(--space) * 4%)';
+	}
 	console.log(item);
+}
+
+async function sleep(ms) {
+  await new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 </script>
